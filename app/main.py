@@ -12,7 +12,7 @@ def show_greeting() -> [str]:
 
 def show_current_directory() -> [str]:
     current_directory = os.getcwd()
-    print(f"We work in {current_directory}")
+    print(f"We work in {current_directory} :)")
 
 
 def main():
