@@ -22,5 +22,3 @@ def show_astronauts(file=convert_json()):
         name = astronaut['name']
         craft = astronaut['craft']
         print(f'Name: {name}\nCraft: {craft}\n')
-
-show_astronauts()

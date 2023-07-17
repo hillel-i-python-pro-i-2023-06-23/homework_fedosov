@@ -45,4 +45,3 @@ def show_information(height:float = convert_height(), weight:float = convert_wei
     print('Ex #3')
     print(f"Average height = {height}\nAverage weight = {weight}")
 
-show_information()

@@ -13,4 +13,3 @@ def show_users(users=generate_users())->str:
     for user in users:
         print(f'{user}')
 
-show_users()
