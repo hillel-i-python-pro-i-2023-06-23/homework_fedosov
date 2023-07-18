@@ -1,9 +1,10 @@
 from app.config import FILES_INPUT_DIR
 
-def read_file(file_name)->str:
-    PATH = FILES_INPUT_DIR.joinpath(file_name)
+def read_file(file_name=FILES_INPUT_DIR.joinpath('some_text.txt')):
+    PATH = file_name
     with open(PATH, 'r') as file:
         result = file.read()
-    print('EX #1')
-    print(result)
+    return result
 
+def show_text(text=read_file()):
+    return text

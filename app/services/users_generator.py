@@ -8,8 +8,12 @@ def generate_users(amount=100):
         fake_email = faker.email()
         yield f'{i+1} {fake_name} {fake_email}'
 
-def show_users(users=generate_users())->str:
-    print('Ex #4')
+def show_users(users=generate_users()):
+    users_list = []
     for user in users:
-        print(f'{user}')
+        users_formatted = f"<li>{user}</li>"
+        users_list.append(users_formatted)
+    results = "".join(users_list)
+    return results
+
 
