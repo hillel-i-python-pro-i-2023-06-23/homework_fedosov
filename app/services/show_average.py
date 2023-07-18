@@ -42,4 +42,4 @@ def convert_height(height:float = find_average_height())->float:
 
 
 def show_information(height:float = convert_height(), weight:float = convert_weight()):
-    return f"<b>Average height{height}<br>Average weight{weight}</b>"
+    return f"<b>Average height{height};<br>Average weight{weight}</b>"
