@@ -1,7 +1,7 @@
 
 import csv
 
-from app.config import FILES_OUTPUT_DIR
+from application.config import FILES_OUTPUT_DIR
 
 
 
