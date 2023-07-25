@@ -1,47 +1,27 @@
-
 import csv
+
 
 from app.config import FILES_OUTPUT_DIR
 
 
-
-def file_read(FILEPATH=FILES_OUTPUT_DIR.joinpath('people_data(extended).csv')):
-    with open(FILEPATH, 'r') as csvfile:
+def file_read(FILEPATH=FILES_OUTPUT_DIR.joinpath("people_data(extended).csv")):
+    with open(FILEPATH) as csvfile:
         reader = list(csv.DictReader(csvfile))
 
         return reader
 
-def find_average_height(file=None)->float:
-    file = file_read()
+
+def show_information(file=None):
+    if file is None:
+        file = file_read()
     height_sum = 0
-
-    for row in file:
-        height_sum += float(row['Height(Inches)'])
-
-
-    return height_sum / len(file)
-
-
-
-def find_average_weight(file=None)->float:
-    file = file_read()
     weight_sum = 0
-
     for row in file:
-        weight_sum += float(row['Weight(Pounds)'])
+        height_sum += float(row["Height(Inches)"])
+        weight_sum += float(row["Weight(Pounds)"])
 
-    return weight_sum / len(file)
+    average_height = height_sum / len(file) * 2.54
+    average_weight = weight_sum / len(file) * 0.453592
 
-def convert_weight(weight:float = find_average_weight())->float:
-    return weight  * 0.453592
-
-
-def convert_height(height:float = find_average_height())->float:
-    return height * 2.54
-
-
-
-def show_information(height:float = convert_height(), weight:float = convert_weight()):
-    print('Ex #3')
-    print(f"Average height = {height}\nAverage weight = {weight}")
-
+    print("Ex #3")
+    print(f"Average height = {average_height}\nAverage weight = {average_weight}")
