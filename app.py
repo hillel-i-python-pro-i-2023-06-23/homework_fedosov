@@ -13,37 +13,41 @@ from application.services.show_average import show_information
 app = Flask(__name__)
 
 
-@app.route('/get-content/')
+@app.route("/get-content/")
 def get_content():
     text = show_text()
 
     return text
-@app.route('/generate-users/')
+
+
+@app.route("/generate-users/")
 def show_users_list():
     users = show_users()
 
     return users
 
-@app.route('/space/')
+
+@app.route("/space/")
 def space():
     astronauts = show_astronauts()
 
     return astronauts
 
-@app.route('/mean/')
+
+@app.route("/mean/")
 def mean():
     results = show_information()
     return results
 
 
 @app.route("/phones/create")
-@use_args({'contact_name': fields.Str(required=True), "phone_value": fields.Int(required=True)}, location="query")
+@use_args({"contact_name": fields.Str(required=True), "phone_value": fields.Int(required=True)}, location="query")
 def users__create(args):
     with DBConnection() as connection:
         with connection:
             connection.execute(
                 "INSERT INTO phones (contact_name, phone_value) VALUES (:contact_name, :phone_value);",
-                {"contact_name": args['contact_name'], "phone_value": args['phone_value']},
+                {"contact_name": args["contact_name"], "phone_value": args["phone_value"]},
             )
 
     return "Ok"
@@ -54,7 +58,9 @@ def users__read_all():
     with DBConnection() as connection:
         contacts = connection.execute("SELECT * FROM phones;").fetchall()
 
-    return "<br>".join([f'{contact["pk"]}: {contact["contact_name"]} - {contact["phone_value"]}' for contact in contacts])
+    return "<br>".join(
+        [f'{contact["pk"]}: {contact["contact_name"]} - {contact["phone_value"]}' for contact in contacts]
+    )
 
 
 @app.route("/phones/read/<int:pk>")
@@ -71,26 +77,26 @@ def users__read(pk: int):
 
 
 @app.route("/phones/update/<int:pk>")
-@use_args({"name": fields.Str(), "number": fields.Int()}, location="query")
+@use_args({"contact_name": fields.Str(), "phone_value": fields.Int()}, location="query")
 def users__update(
     args,
     pk: int,
 ):
     with DBConnection() as connection:
         with connection:
-            name = args.get("contact_name")
-            number = args.get("phone_value")
-            if name is None or number is None:
+            contact_name = args.get("contact_name")
+            phone_value = args.get("phone_value")
+            if contact_name is None or phone_value is None:
                 return Response(
                     "Need to provide at least one argument",
                     status=400,
                 )
 
             args_for_request = []
-            if name is not None:
-                args_for_request.append("contact_name=:name")
-            if number is not None:
-                args_for_request.append("phone_value=:number")
+            if contact_name is not None:
+                args_for_request.append("contact_name=:contact_name")
+            if phone_value is not None:
+                args_for_request.append("phone_value=:phone_value")
 
             args_2 = ", ".join(args_for_request)
 
@@ -98,8 +104,8 @@ def users__update(
                 "UPDATE phones " f"SET {args_2} " "WHERE pk=:pk;",
                 {
                     "pk": pk,
-                    "phone_value": number,
-                    "contact_name": name,
+                    "phone_value": phone_value,
+                    "contact_name": contact_name,
                 },
             )
 
@@ -120,8 +126,8 @@ def users__delete(pk):
     return "Ok"
 
 
-
 create_table()
 
-if __name__ == '__main__':
-    app.run(debug=True,port=8000)
+
+if __name__ == "__main__":
+    app.run(debug=True)
