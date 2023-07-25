@@ -1,20 +1,19 @@
-import os
-from faker import Faker
+from app.services.file_reader import read_file
 
+from app.services.parth_json import show_astronauts
 
-def show_greeting() -> [str]:
-    fake = Faker()
-    name = fake.name()
-    address = fake.address()
+from app.services.show_average import show_information
 
-    print(f"Hello, my name is {name}!\nI live in {address}\n")
-
-
-def show_current_directory() -> [str]:
-    current_directory = os.getcwd()
-    print(f"We work in {current_directory} :)")
-
+from app.services.users_generator import show_users
 
 def main():
-    show_greeting()
-    show_current_directory()
+    print()
+    text_file = 'some_text.txt'
+    read_file(text_file)
+    print()
+    show_astronauts()
+    print()
+    show_information()
+    print()
+    show_users()
+
