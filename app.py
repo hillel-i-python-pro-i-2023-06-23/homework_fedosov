@@ -1,8 +1,8 @@
 from flask import Flask
-from app.services.users_generator import show_users
-from app.services.file_reader import show_text
-from app.services.parth_json import show_astronauts
-from app.services.show_average import show_information
+from application.services.users_generator import show_users
+from application.services.file_reader import show_text
+from application.services.parth_json import show_astronauts
+from application.services.show_average import show_information
 
 
 app = Flask(__name__)

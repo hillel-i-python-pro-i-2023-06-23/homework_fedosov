@@ -1,4 +1,4 @@
-from app.config import FILES_INPUT_DIR
+from application.config import FILES_INPUT_DIR
 
 def read_file(file_name=FILES_INPUT_DIR.joinpath('some_text.txt')):
     PATH = file_name
